@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
@@ -155,7 +157,13 @@ public class Login extends javax.swing.JFrame {
                 PassFieldMouseClicked(evt);
             }
         });
+        PassField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PassFieldKeyTyped(evt);
+            }
+        });
         Base.add(PassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 410, -1));
+        PassField.getAccessibleContext().setAccessibleName("");
 
         UserIconLbl1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\IdTypeIcon.png")); // NOI18N
         Base.add(UserIconLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
@@ -165,6 +173,11 @@ public class Login extends javax.swing.JFrame {
         DocumentTypeBox.setForeground(new java.awt.Color(152, 18, 240));
         DocumentTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de Documento...", "Cedula de Ciudadania", "Tarjeta de Identidad", "Cedula de Extranjeria" }));
         DocumentTypeBox.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(130, 10, 209), 1, true));
+        DocumentTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DocumentTypeBoxActionPerformed(evt);
+            }
+        });
         Base.add(DocumentTypeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 410, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,9 +216,27 @@ public class Login extends javax.swing.JFrame {
         String idUser = IdField.getText();
         String passUser = PassField.getText();
         
-        System.out.println(documentType + "\n" + idUser + "\n" + passUser);
+        String documentTypeBD = "Cedula de Ciudadania";
+        long idUserDB = 1122506502;
+        String passUserDB = "1234";
+        
+        if (documentType.equals(documentTypeBD) && Integer.parseInt(idUser) == idUserDB && passUser.equals(passUserDB)) {
+            System.out.println("Inició Correctamente");
+        }else{
+            System.out.println("Campos Erroneos");
+        }
+        
+        //Connection connection = DriverManager.getConnection();
         
     }//GEN-LAST:event_LoginBtnMouseClicked
+
+    private void PassFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PassFieldKeyTyped
+        
+    }//GEN-LAST:event_PassFieldKeyTyped
+
+    private void DocumentTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentTypeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DocumentTypeBoxActionPerformed
 
     /**
      * @param args the command line arguments

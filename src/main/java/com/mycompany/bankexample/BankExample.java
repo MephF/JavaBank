@@ -4,6 +4,9 @@
 
 package com.mycompany.bankexample;
 import Views.Login;
+import java.sql.Connection;
+import Classes.DbConnection;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,6 +15,15 @@ import Views.Login;
 public class BankExample {
 
     public static void main(String[] args) {
+        
+        try {
+            Connection conn = DbConnection.getConnection();
+            System.out.println("Connected to the database!");
+            // Aquí puedes realizar operaciones con la base de datos
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        
         Login log = new Login();
         log.pack();
         log.setLocationRelativeTo(null);

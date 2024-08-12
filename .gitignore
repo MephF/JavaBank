@@ -27,6 +27,8 @@ replay_pid*
 /build/
 /nbproject/private/
 /dist/
+pom.xml
+/target/
 
 # Specific archives from user of NetBeans
 nbproject/private/
