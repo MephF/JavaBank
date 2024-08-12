@@ -3,8 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import Classes.DbConnection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,7 +40,7 @@ public class Login extends javax.swing.JFrame {
         BankIconLbl = new javax.swing.JLabel();
         TittleBankLbl = new javax.swing.JLabel();
         TittleBankLbl1 = new javax.swing.JLabel();
-        UserIconLbl = new javax.swing.JLabel();
+        OpenEyeIcon = new javax.swing.JLabel();
         IdUndrLine = new javax.swing.JSeparator();
         PassIconLbl = new javax.swing.JLabel();
         PassUndrLine = new javax.swing.JSeparator();
@@ -43,6 +50,8 @@ public class Login extends javax.swing.JFrame {
         PassField = new javax.swing.JPasswordField();
         UserIconLbl1 = new javax.swing.JLabel();
         DocumentTypeBox = new javax.swing.JComboBox<>();
+        UserIconLbl2 = new javax.swing.JLabel();
+        CloseEyeIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,15 +75,18 @@ public class Login extends javax.swing.JFrame {
         LeftBarLayout.setHorizontalGroup(
             LeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftBarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(TittleBankLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
             .addGroup(LeftBarLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(LeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TittleBankLbl1)
-                    .addComponent(BankIconLbl))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addGroup(LeftBarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(TittleBankLbl1))
+                    .addGroup(LeftBarLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(BankIconLbl)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LeftBarLayout.setVerticalGroup(
             LeftBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,24 +95,29 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(TittleBankLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TittleBankLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(81, 81, 81)
                 .addComponent(BankIconLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
-        Base.add(LeftBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 630));
+        Base.add(LeftBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 630));
 
-        UserIconLbl.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\IdIcon.png")); // NOI18N
-        Base.add(UserIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
+        OpenEyeIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\eye.png")); // NOI18N
+        OpenEyeIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OpenEyeIconMouseClicked(evt);
+            }
+        });
+        Base.add(OpenEyeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 370, -1, -1));
 
         IdUndrLine.setForeground(new java.awt.Color(130, 10, 209));
-        Base.add(IdUndrLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 430, 10));
+        Base.add(IdUndrLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 430, 10));
 
         PassIconLbl.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\PassIcon.png")); // NOI18N
-        Base.add(PassIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, -1, -1));
+        Base.add(PassIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
 
         PassUndrLine.setForeground(new java.awt.Color(130, 10, 209));
-        Base.add(PassUndrLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 430, 10));
+        Base.add(PassUndrLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 430, 10));
 
         IdField.setBackground(new java.awt.Color(255, 255, 255));
         IdField.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
@@ -125,7 +142,7 @@ public class Login extends javax.swing.JFrame {
                 IdFieldActionPerformed(evt);
             }
         });
-        Base.add(IdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 410, -1));
+        Base.add(IdField, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 410, -1));
 
         LoginBtn.setBackground(new java.awt.Color(130, 10, 209));
         LoginBtn.setFont(new java.awt.Font("Dialog", 0, 34)); // NOI18N
@@ -136,13 +153,13 @@ public class Login extends javax.swing.JFrame {
                 LoginBtnMouseClicked(evt);
             }
         });
-        Base.add(LoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, -1, -1));
+        Base.add(LoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
         CreateBtn.setBackground(new java.awt.Color(130, 10, 209));
         CreateBtn.setFont(new java.awt.Font("Dialog", 0, 34)); // NOI18N
         CreateBtn.setForeground(new java.awt.Color(255, 255, 255));
         CreateBtn.setText("Crear Cuenta");
-        Base.add(CreateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, -1, -1));
+        Base.add(CreateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, -1, -1));
 
         PassField.setBackground(new java.awt.Color(255, 255, 255));
         PassField.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
@@ -162,11 +179,11 @@ public class Login extends javax.swing.JFrame {
                 PassFieldKeyTyped(evt);
             }
         });
-        Base.add(PassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 410, -1));
+        Base.add(PassField, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 410, -1));
         PassField.getAccessibleContext().setAccessibleName("");
 
         UserIconLbl1.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\IdTypeIcon.png")); // NOI18N
-        Base.add(UserIconLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        Base.add(UserIconLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
 
         DocumentTypeBox.setBackground(new java.awt.Color(255, 255, 255));
         DocumentTypeBox.setFont(new java.awt.Font("Dialog", 0, 34)); // NOI18N
@@ -178,7 +195,19 @@ public class Login extends javax.swing.JFrame {
                 DocumentTypeBoxActionPerformed(evt);
             }
         });
-        Base.add(DocumentTypeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 410, -1));
+        Base.add(DocumentTypeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 410, -1));
+
+        UserIconLbl2.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\IdIcon.png")); // NOI18N
+        Base.add(UserIconLbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+
+        CloseEyeIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\eyeClose.png")); // NOI18N
+        CloseEyeIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CloseEyeIconMouseClicked(evt);
+            }
+        });
+        Base.add(CloseEyeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 370, -1, -1));
+        CloseEyeIcon.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,21 +241,65 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginBtnMouseClicked
         
-        String documentType = DocumentTypeBox.getItemAt(DocumentTypeBox.getSelectedIndex());
-        String idUser = IdField.getText();
-        String passUser = PassField.getText();
-        
-        String documentTypeBD = "Cedula de Ciudadania";
-        long idUserDB = 1122506502;
-        String passUserDB = "1234";
-        
-        if (documentType.equals(documentTypeBD) && Integer.parseInt(idUser) == idUserDB && passUser.equals(passUserDB)) {
-            System.out.println("Inició Correctamente");
-        }else{
-            System.out.println("Campos Erroneos");
+        try (Connection connection = DbConnection.getConnection()) {
+            // Obtener datos del formulario
+            String documentType = DocumentTypeBox.getItemAt(DocumentTypeBox.getSelectedIndex());
+            String idUser = IdField.getText();
+            String passUser = PassField.getText();
+
+            // Verificar si el ID de usuario es un número válido
+            long idUserLong;
+            try {
+                idUserLong = Long.parseLong(idUser);
+            } catch (NumberFormatException e) {
+                System.out.println("El ID de usuario debe ser un número válido.");
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, "ID de usuario no válido", e);
+                return; // Salir del método si el ID no es válido
+            }
+
+            // Consulta para validar las credenciales del usuario
+            String query = "SELECT * FROM creditusertable WHERE documentType = ? AND id = ? AND password = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+                pstmt.setString(1, documentType); // Asignar tipo de documento
+                pstmt.setLong(2, idUserLong); // Asignar ID del usuario
+                pstmt.setString(3, passUser); // Asignar contraseña
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        // Si hay resultados, el usuario ha iniciado sesión correctamente
+                        System.out.println("Inició Correctamente");
+
+                        // Imprimir detalles del usuario
+                        long id = rs.getLong("id");
+                        String names = rs.getString("names");
+                        String lastnames = rs.getString("lastnames");
+                        String password = rs.getString("password");
+                        long number = rs.getLong("number");
+                        String address = rs.getString("address");
+                        long idcreditaccount = rs.getLong("idcreditaccount");
+                        long cashcreditaccount = rs.getLong("cashcreditaccount");
+                        String documenttype = rs.getString("documenttype");
+
+                        System.out.println("id: " + id + "\n" +
+                                           "names: " + names + "\n" +
+                                           "lastnames: " + lastnames + "\n" +
+                                           "password: " + password + "\n" +
+                                           "number: " + number + "\n" +
+                                           "address: " + address + "\n" +
+                                           "idcreditaccount: " + idcreditaccount + "\n" +
+                                           "cashcreditaccount: " + cashcreditaccount + "\n" +
+                                           "documenttype" + documenttype);
+                    } else {
+                        // Si no hay resultados, las credenciales son incorrectas
+                        System.out.println("Campos Erróneos");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, "Error de base de datos", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, "Driver no encontrado", ex);
         }
-        
-        //Connection connection = DriverManager.getConnection();
         
     }//GEN-LAST:event_LoginBtnMouseClicked
 
@@ -237,6 +310,22 @@ public class Login extends javax.swing.JFrame {
     private void DocumentTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocumentTypeBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocumentTypeBoxActionPerformed
+
+    private void OpenEyeIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenEyeIconMouseClicked
+       
+        PassField.setEchoChar((char) 0);
+        OpenEyeIcon.setVisible(false);
+        CloseEyeIcon.setVisible(true);
+        
+    }//GEN-LAST:event_OpenEyeIconMouseClicked
+
+    private void CloseEyeIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseEyeIconMouseClicked
+        
+        PassField.setEchoChar('*');
+        OpenEyeIcon.setVisible(true);
+        CloseEyeIcon.setVisible(false);
+        
+    }//GEN-LAST:event_CloseEyeIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -276,18 +365,20 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BankIconLbl;
     private javax.swing.JPanel Base;
+    private javax.swing.JLabel CloseEyeIcon;
     private javax.swing.JButton CreateBtn;
     private javax.swing.JComboBox<String> DocumentTypeBox;
     private javax.swing.JTextField IdField;
     private javax.swing.JSeparator IdUndrLine;
     private javax.swing.JPanel LeftBar;
     private javax.swing.JButton LoginBtn;
+    private javax.swing.JLabel OpenEyeIcon;
     private javax.swing.JPasswordField PassField;
     private javax.swing.JLabel PassIconLbl;
     private javax.swing.JSeparator PassUndrLine;
     private javax.swing.JLabel TittleBankLbl;
     private javax.swing.JLabel TittleBankLbl1;
-    private javax.swing.JLabel UserIconLbl;
     private javax.swing.JLabel UserIconLbl1;
+    private javax.swing.JLabel UserIconLbl2;
     // End of variables declaration//GEN-END:variables
 }

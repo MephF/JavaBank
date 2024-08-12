@@ -17,7 +17,7 @@ public class BankExample {
     public static void main(String[] args) {
         
         try {
-            Connection conn = DbConnection.getConnection();
+            Connection connection = DbConnection.getConnection();
             System.out.println("Connected to the database!");
             // Aquí puedes realizar operaciones con la base de datos
         } catch (SQLException | ClassNotFoundException e) {
