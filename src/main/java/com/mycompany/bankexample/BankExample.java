@@ -3,9 +3,11 @@
  */
 
 package com.mycompany.bankexample;
+import Classes.CreditUser;
 import Views.Login;
 import java.sql.Connection;
 import Classes.DbConnection;
+import Classes.DebitUser;
 import java.sql.SQLException;
 
 /**
@@ -23,6 +25,9 @@ public class BankExample {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        
+        CreditUser currentCreditUser = new CreditUser();
+        DebitUser currentDebitUser = new DebitUser();
         
         Login log = new Login();
         log.pack();

@@ -25,6 +25,10 @@ public class User {
         this.number = number;
         this.address = address;
     }
+    
+    public User(){
+        
+    }
 
     public String getNames() {
         return names;

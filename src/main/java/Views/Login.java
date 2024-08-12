@@ -257,18 +257,19 @@ public class Login extends javax.swing.JFrame {
                 return; // Salir del método si el ID no es válido
             }
 
-            // Consulta para validar las credenciales del usuario
+            // Query para encontrar el usuario en bd
             String query = "SELECT * FROM creditusertable WHERE documentType = ? AND id = ? AND password = ?";
             try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-                pstmt.setString(1, documentType); // Asignar tipo de documento
-                pstmt.setLong(2, idUserLong); // Asignar ID del usuario
-                pstmt.setString(3, passUser); // Asignar contraseña
+                pstmt.setString(1, documentType); // Primer parametro
+                pstmt.setLong(2, idUserLong); // Segundo parametro
+                pstmt.setString(3, passUser); // Tercer parametro
 
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         // Si hay resultados, el usuario ha iniciado sesión correctamente
                         System.out.println("Inició Correctamente");
-
+                        
+                        /*
                         // Imprimir detalles del usuario
                         long id = rs.getLong("id");
                         String names = rs.getString("names");
@@ -289,6 +290,8 @@ public class Login extends javax.swing.JFrame {
                                            "idcreditaccount: " + idcreditaccount + "\n" +
                                            "cashcreditaccount: " + cashcreditaccount + "\n" +
                                            "documenttype" + documenttype);
+                        */
+                        
                     } else {
                         // Si no hay resultados, las credenciales son incorrectas
                         System.out.println("Campos Erróneos");

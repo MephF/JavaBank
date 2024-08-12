@@ -18,6 +18,10 @@ public class CreditUser extends User{
         this.idCreditAccount = idCreditAccount;
         this.cashCreditAccount = cashCreditAccount;
     }
+    
+    public CreditUser(){
+        
+    }
 
     public long getIdCreditAccount() {
         return idCreditAccount;
