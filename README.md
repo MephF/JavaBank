@@ -1,2 +1,4 @@
 # JavaBank
-Proyecto pequeño empleando Java con una interfaz visual utilizando Jframe y como DBMS PostgreSQL.
+
+Proyecto pequeño desarrollado en Java, que incluye una interfaz gráfica de usuario (GUI) construida con JFrame, y utiliza PostgreSQL como sistema de gestión de bases de datos (DBMS).
+
