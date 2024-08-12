@@ -10,24 +10,38 @@ package Classes;
  */
 public class User {
 
+    private long id;
+    private String documentType;
     private String names;
     private String lastNames;
-    private long id;
     private String password;
     private long number;
     private String address;
 
-    public User(String names, String lastNames, long id, String password, long number, String address) {
+    public User(long id, String documentType, String names, String lastNames, String password, long number, String address) {
+        this.id = id;
+        this.documentType = documentType;
         this.names = names;
         this.lastNames = lastNames;
-        this.id = id;
         this.password = password;
         this.number = number;
         this.address = address;
     }
-    
-    public User(){
-        
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
     }
 
     public String getNames() {
@@ -44,14 +58,6 @@ public class User {
 
     public void setLastNames(String lastNames) {
         this.lastNames = lastNames;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getPassword() {
@@ -80,6 +86,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "names=" + names + ", lastNames=" + lastNames + ", id=" + id + ", password=" + password + ", number=" + number + ", Address=" + address + '}';
-    }  
+        return "User{" + "id=" + id + ", documentType=" + documentType + ", names=" + names + ", lastNames=" + lastNames + ", password=" + password + ", number=" + number + ", address=" + address + '}';
+    }
+    
+    
 }

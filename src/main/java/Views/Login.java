@@ -258,7 +258,7 @@ public class Login extends javax.swing.JFrame {
             }
 
             // Query para encontrar el usuario en bd
-            String query = "SELECT * FROM creditusertable WHERE documentType = ? AND id = ? AND password = ?";
+            String query = "SELECT * FROM bank_user WHERE document_type = ? AND document_id = ? AND password = ?";
             try (PreparedStatement pstmt = connection.prepareStatement(query)) {
                 pstmt.setString(1, documentType); // Primer parametro
                 pstmt.setLong(2, idUserLong); // Segundo parametro
@@ -267,31 +267,7 @@ public class Login extends javax.swing.JFrame {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         // Si hay resultados, el usuario ha iniciado sesión correctamente
-                        System.out.println("Inició Correctamente");
-                        
-                        /*
-                        // Imprimir detalles del usuario
-                        long id = rs.getLong("id");
-                        String names = rs.getString("names");
-                        String lastnames = rs.getString("lastnames");
-                        String password = rs.getString("password");
-                        long number = rs.getLong("number");
-                        String address = rs.getString("address");
-                        long idcreditaccount = rs.getLong("idcreditaccount");
-                        long cashcreditaccount = rs.getLong("cashcreditaccount");
-                        String documenttype = rs.getString("documenttype");
-
-                        System.out.println("id: " + id + "\n" +
-                                           "names: " + names + "\n" +
-                                           "lastnames: " + lastnames + "\n" +
-                                           "password: " + password + "\n" +
-                                           "number: " + number + "\n" +
-                                           "address: " + address + "\n" +
-                                           "idcreditaccount: " + idcreditaccount + "\n" +
-                                           "cashcreditaccount: " + cashcreditaccount + "\n" +
-                                           "documenttype" + documenttype);
-                        */
-                        
+                        System.out.println("Inició Correctamente");                        
                     } else {
                         // Si no hay resultados, las credenciales son incorrectas
                         System.out.println("Campos Erróneos");
