@@ -160,6 +160,11 @@ public class Login extends javax.swing.JFrame {
         CreateBtn.setFont(new java.awt.Font("Dialog", 0, 34)); // NOI18N
         CreateBtn.setForeground(new java.awt.Color(255, 255, 255));
         CreateBtn.setText("Crear Cuenta");
+        CreateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateBtnActionPerformed(evt);
+            }
+        });
         Base.add(CreateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, -1, -1));
 
         PassField.setBackground(new java.awt.Color(255, 255, 255));
@@ -338,6 +343,15 @@ public class Login extends javax.swing.JFrame {
         CloseEyeIcon.setVisible(false);
         
     }//GEN-LAST:event_CloseEyeIconMouseClicked
+
+    private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+        
+        Register reg = new Register();
+        reg.pack();
+        reg.setLocationRelativeTo(null);
+        reg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CreateBtnActionPerformed
 
     /**
      * @param args the command line arguments

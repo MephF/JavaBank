@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Views;
+import Classes.UserSession;
 
 /**
  *
@@ -40,7 +41,6 @@ public class DebitUserMenu extends javax.swing.JFrame {
         TittleBankLbl6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1064, 628));
         setSize(new java.awt.Dimension(1064, 628));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -93,7 +93,7 @@ public class DebitUserMenu extends javax.swing.JFrame {
 
         TittleBankLbl3.setFont(new java.awt.Font("Dialog", 1, 44)); // NOI18N
         TittleBankLbl3.setForeground(new java.awt.Color(130, 10, 209));
-        TittleBankLbl3.setText("Bienvenido ...");
+        TittleBankLbl3.setText("Bienvenid@ " + UserSession.getCurrentBankUser().getNames());
         jPanel1.add(TittleBankLbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, 60));
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LEIDY\\Documents\\NetBeansProjects\\BankExample\\src\\main\\java\\Resources\\EditProfileIcon.png")); // NOI18N
@@ -124,7 +124,7 @@ public class DebitUserMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
