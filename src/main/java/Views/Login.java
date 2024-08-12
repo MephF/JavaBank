@@ -4,10 +4,11 @@
  */
 package Views;
 
+import Classes.BankUser;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Connection;
 import Classes.DbConnection;
+import Classes.UserSession;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -267,7 +268,39 @@ public class Login extends javax.swing.JFrame {
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
                         // Si hay resultados, el usuario ha iniciado sesión correctamente
-                        System.out.println("Inició Correctamente");                        
+                        System.out.println("Inició Correctamente");
+
+                        long document_id = rs.getLong("document_id");
+                        String document_type = rs.getString("document_type");
+                        String names = rs.getString("names");
+                        String lastnames = rs.getString("lastnames");
+                        String password = rs.getString("password");
+                        long number = rs.getLong("number");
+                        String address = rs.getString("address");
+                        String account_type = rs.getString("account_type");
+                        long account_id = rs.getLong("account_id");
+                        long cash = rs.getLong("cash");
+                        
+                        BankUser currentBankUser = new BankUser(document_id, document_type, names, lastnames, password, number, address, account_type, account_id, cash);
+                        
+                        UserSession.setCurrentBankUser(currentBankUser);
+                        
+                        switch(account_type){
+                            case "Credito" -> {
+                                CreditUserMenu crdtUsrMnu = new CreditUserMenu();
+                                crdtUsrMnu.pack();
+                                crdtUsrMnu.setLocationRelativeTo(null);
+                                this.dispose();
+                                crdtUsrMnu.setVisible(true);
+                            }
+                            case "Debito" -> {
+                                DebitUserMenu DbtUsrMnu = new DebitUserMenu();
+                                DbtUsrMnu.pack();
+                                DbtUsrMnu.setLocationRelativeTo(null);
+                                this.dispose();
+                                DbtUsrMnu.setVisible(true);
+                            }
+                        }
                     } else {
                         // Si no hay resultados, las credenciales son incorrectas
                         System.out.println("Campos Erróneos");
@@ -337,6 +370,7 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                BankUser currentBankUser = new BankUser();
             }
         });
     }

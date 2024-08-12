@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.bankexample;
+import Classes.BankUser;
 import Views.Login;
 import java.sql.Connection;
 import Classes.DbConnection;

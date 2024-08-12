@@ -20,6 +20,10 @@ public class BankUser extends User {
         this.accountId = accountId;
         this.accountCash = accountCash;
     }
+    
+    public BankUser(){
+        
+    }
 
     public String getAccountType() {
         return accountType;
